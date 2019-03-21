@@ -2,10 +2,10 @@ package server
 
 import (
 	"database/sql"
-	"flag"
 	"fmt"
 	"log"
 	"net"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/yuuyamad/go-grpc-sample/pkg/api"
@@ -61,12 +61,11 @@ func getConfig() Config {
 
 	var cfg Config
 
-	flag.StringVar(&cfg.Port, "grpc-port", "", "gRPC port to bind")
-	flag.StringVar(&cfg.DBHost, "db-host", "", "Database host")
-	flag.StringVar(&cfg.DBUser, "db-user", "", "Database user")
-	flag.StringVar(&cfg.DBPassword, "db-password", "", "Database password")
-	flag.StringVar(&cfg.DBSchema, "db-schema", "", "Database schema")
-	flag.Parse()
+	cfg.Port = os.Getenv("GRPC_PORT")
+	cfg.DBHost = os.Getenv("DB_HOST")
+	cfg.DBUser = os.Getenv("DB_USER")
+	cfg.DBPassword = os.Getenv("DB_PASSWORD")
+	cfg.DBSchema = os.Getenv("DB_SCHEMA")
 
 	return cfg
 }

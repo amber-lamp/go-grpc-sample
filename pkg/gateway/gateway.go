@@ -2,8 +2,8 @@ package gateway
 
 import (
 	"context"
-	"flag"
 	"net/http"
+	"os"
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
@@ -37,9 +37,8 @@ func RunServer() error {
 func getConfig() Config {
 	var cfg Config
 
-	flag.StringVar(&cfg.Server, "server", "", "grpc server and port")
-	flag.StringVar(&cfg.Port, "port", "", "gateway server port")
-	flag.Parse()
+	cfg.Server = os.Getenv("GRPC_SERVER")
+	cfg.Port = os.Getenv("GATEWAY_PORT")
 
 	return cfg
 }
