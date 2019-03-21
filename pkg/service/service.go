@@ -5,7 +5,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/yuuyamad/go-grpc-sample/pkg/api"
+	"github.com/amber-lamp/go-grpc-sample/pkg/api"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
