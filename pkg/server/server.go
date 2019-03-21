@@ -7,9 +7,9 @@ import (
 	"net"
 	"os"
 
+	"github.com/amber-lamp/go-grpc-sample/pkg/api"
+	"github.com/amber-lamp/go-grpc-sample/pkg/service"
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/yuuyamad/go-grpc-sample/pkg/api"
-	"github.com/yuuyamad/go-grpc-sample/pkg/service"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )

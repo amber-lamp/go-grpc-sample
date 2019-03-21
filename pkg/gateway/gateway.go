@@ -8,7 +8,7 @@ import (
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/grpc"
 
-	gw "github.com/yuuyamad/go-grpc-sample/pkg/api"
+	gw "github.com/amber-lamp/go-grpc-sample/pkg/api"
 )
 
 type Config struct {
