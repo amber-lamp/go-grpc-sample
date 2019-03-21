@@ -60,6 +60,7 @@ func RunServer() error {
 func getConfig() Config {
 
 	var cfg Config
+
 	flag.StringVar(&cfg.Port, "grpc-port", "", "gRPC port to bind")
 	flag.StringVar(&cfg.DBHost, "db-host", "", "Database host")
 	flag.StringVar(&cfg.DBUser, "db-user", "", "Database user")

@@ -1,6 +1,9 @@
 syntax = "proto3";
 package api;
 
+
+import "google/api/annotations.proto";
+
 // bookのデータをやり取りするためのメッセージ
 message book {
     // 一意に振られるid
@@ -81,18 +84,45 @@ message ReadAllResponse{
 
 // gRPCのサービス用
 service BookService {
+    // 書籍情報の全件取得用のRPCメソッド
+    rpc ReadAll(ReadAllRequest) returns (ReadAllResponse){
+        option (google.api.http) = {
+            get: "/book/all"
+        };
+    }
+
     // 書籍情報作成用のRPCメソッド
-    rpc Create(CreateRequest) returns (CreateResponse);
+    rpc Create(CreateRequest) returns (CreateResponse){
+        option (google.api.http) = {
+            post: "/book"
+            body: "*"
+        };
+    }
 
     // 書籍情報１件取得用のRPCメソッド
-    rpc Read(ReadRequest) returns (ReadResponse);
+    rpc Read(ReadRequest) returns (ReadResponse){
+        option (google.api.http) = {
+            get: "/book/{id}"
+        };
+    }
 
     // 書籍情報の更新用のRPCメソッド
-    rpc Update(UpdateRequest) returns (UpdateResponse);
+    rpc Update(UpdateRequest) returns (UpdateResponse){
+        option (google.api.http) = {
+            put: "/book/{book.id}"
+            body: "*"
+
+            additional_bindings {
+                patch: "/book/{book.id}"
+                body: "*"
+            }
+        };
+    }
 
     // 書籍情報の削除用のRPCメソッド
-    rpc Delete(DeleteRequest) returns (DeleteResponse);
-
-    // 書籍情報の全件取得用のRPCメソッド
-    rpc ReadAll(ReadAllRequest) returns (ReadAllResponse);
+    rpc Delete(DeleteRequest) returns (DeleteResponse){
+        option (google.api.http) = {
+            delete: "/book/{id}"
+        };
+    }
 }
