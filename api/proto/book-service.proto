@@ -2,7 +2,7 @@ syntax = "proto3";
 package api;
 
 // bookのデータをやり取りするためのメッセージ
-message book {
+message Book {
     // 一意に振られるid
     int64 id = 1;
 
@@ -24,8 +24,8 @@ message book {
 
 // 本の情報を新しく作る時のメッセージ
 message CreateRequest{
-    // Todoのメッセージを追加する
-    book book = 1;
+    // 書籍データを追加する
+    Book book = 1;
 }
 
 // 書籍情報作成時のレスポンスメッセージ
@@ -35,21 +35,21 @@ message CreateResponse{
 }
 
 // 書籍情報をID指定で取得する時のメッセージ
-message ReadRequest{
+message GetRequest{
     // 取得したい書籍のID
     int64 id = 1;
 }
 
 // 書籍情報をIDで取得する場合のレスポンス
-message ReadResponse{
+message GetResponse{
     // 取得した書籍情報
-    book book = 1;
+    Book book = 1;
 }
 
 // 書籍情報を更新する場合のメッセージ
 message UpdateRequest{
-    // 更新したいToDoのデータ
-    book book = 1;
+    // 更新したい書籍のデータ
+    Book book = 1;
 }
 
 // 書籍情報を更新した時のレスポンス
@@ -71,12 +71,12 @@ message DeleteResponse{
 }
 
 // 全件取得する場合のメッセージ
-message ReadAllRequest{}
+message GetAllRequest{}
 
 // 書籍情報を全件取得した時のレスポンス
-message ReadAllResponse{
+message GetAllResponse{
     // List形式で書籍情報を返す
-    repeated book books = 1;
+    repeated Book books = 1;
 }
 
 // gRPCのサービス用
@@ -85,7 +85,7 @@ service BookService {
     rpc Create(CreateRequest) returns (CreateResponse);
 
     // 書籍情報１件取得用のRPCメソッド
-    rpc Read(ReadRequest) returns (ReadResponse);
+    rpc Get(GetRequest) returns (GetResponse);
 
     // 書籍情報の更新用のRPCメソッド
     rpc Update(UpdateRequest) returns (UpdateResponse);
@@ -94,5 +94,5 @@ service BookService {
     rpc Delete(DeleteRequest) returns (DeleteResponse);
 
     // 書籍情報の全件取得用のRPCメソッド
-    rpc ReadAll(ReadAllRequest) returns (ReadAllResponse);
+    rpc GetAll(GetAllRequest) returns (GetAllResponse);
 }
