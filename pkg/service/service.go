@@ -14,6 +14,7 @@ type server struct {
 	db *sql.DB
 }
 
+// NewBookServiceServer serverにdbを登録する
 func NewBookServiceServer(db *sql.DB) api.BookServiceServer {
 	return &server{db: db}
 }
@@ -143,7 +144,7 @@ func (s *server) GetAll(ctx context.Context, req *api.GetAllRequest) (*api.GetAl
 	}
 	defer c.Close()
 
-	rows, err := c.QueryContext(ctx, "SELECT * FROM books")
+	rows, err := c.QueryContext(ctx, "SELECT `id`, `title`, `author`, `description`, `pages`, `price` FROM books")
 	if err != nil {
 		return nil, status.Error(codes.Unknown, "failed to select "+err.Error())
 	}
